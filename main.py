@@ -8,16 +8,16 @@ from fastapi.responses import StreamingResponse
 
 app = FastAPI()
 
-# Разрешаем CORS с определенных доменов (Frontend URL)
+# Разрешаем запросы с этого домена (Front-end URL)
 origins = [
-    "https://your-frontend-project.vercel.app",  # Заменить на свой Frontend URL
+    "https://frontend-six-alpha-13.vercel.app",  # Заменить на реальный URL твоего Frontend
 ]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,  # Разрешаем запросы с этих доменов
     allow_credentials=True,
-    allow_methods=["*"],  # Разрешаем все методы
+    allow_methods=["*"],  # Разрешаем все методы HTTP
     allow_headers=["*"],  # Разрешаем все заголовки
 )
 
@@ -38,3 +38,4 @@ async def generate_image(prompt: Prompt):
     byte_io.seek(0)
 
     return StreamingResponse(byte_io, media_type="image/png")
+
